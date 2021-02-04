@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class loginui extends StatefulWidget {
+class LoginUi extends StatefulWidget {
   @override
-  _loginuiState createState() => _loginuiState();
+  _LoginUiState createState() => _LoginUiState();
 }
 
-class _loginuiState extends State<loginui> {
+class _LoginUiState extends State<LoginUi> {
 
   DateTime selectedDate = DateTime.now();
   TextEditingController dateController = TextEditingController();
@@ -22,10 +22,8 @@ class _loginuiState extends State<loginui> {
       setState(() {
         selectedDate = picked;
         dateController.text= myformat.toString();
-
       });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,6 @@ class _loginuiState extends State<loginui> {
                             hintText: 'ABCD1234',
                             border: OutlineInputBorder()
                           ),
-
                       ),),
                       Container(
                         width: 20,
@@ -74,7 +71,6 @@ class _loginuiState extends State<loginui> {
                             onPressed: (){}),
                       ),
                     ],
-
                   ),
                 ),
                 Container(
@@ -93,7 +89,6 @@ class _loginuiState extends State<loginui> {
                               hintText: '1287759494949',
                               border: OutlineInputBorder()
                           ),
-
                         ),),
                       Container(
                         width: 20,
@@ -101,7 +96,6 @@ class _loginuiState extends State<loginui> {
                       ButtonTheme(
                         height: MediaQuery.of(context).size.height*0.07,
                         minWidth: MediaQuery.of(context).size.width*0.33,
-
                         child: RaisedButton(
                             color: Colors.black,
                             child: Text('Upload Licence',style: TextStyle(
@@ -110,7 +104,6 @@ class _loginuiState extends State<loginui> {
                             ),),
                             onPressed: (){}),
                       ),
-
                     ],
                   ),
                 ),
@@ -155,7 +148,6 @@ class _loginuiState extends State<loginui> {
                     suffixIcon: IconButton(icon:Icon(Icons.calendar_today,),
                     onPressed:()=>_selectDate(context)),
                   ),
-
                 ),
               ],
             ),
