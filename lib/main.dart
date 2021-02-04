@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hala_avis_car/screens/accident_report_ui.dart';
+import 'package:hala_avis_car/screens/home_ui.dart';
 import 'package:hala_avis_car/screens/loginui.dart';
 
 void main() {
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    home: loginui()
+    home: HomeUi()
     );
         }
 }
