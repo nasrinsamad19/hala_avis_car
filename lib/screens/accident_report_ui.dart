@@ -1,3 +1,4 @@
+//App hang on same device
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -21,9 +22,9 @@ class accident extends StatefulWidget {
 }
 
 class _State extends State<accident> {
+
   String remotePDFpath = "";
   int _counter = 0;
-
 
   void _incrementCounter() {
     setState(() {
@@ -37,12 +38,11 @@ class _State extends State<accident> {
     await PermissionHandler().requestPermissions([PermissionGroup.storage]);
   }
 
-  Future download2(Dio dio, String url, String savePath) async {
+  Future download(Dio dio, String url, String savePath) async {
     try {
       Response response = await dio.get(
         url,
         onReceiveProgress: showDownloadProgress,
-        //Received data with List<int>
         options: Options(
             responseType: ResponseType.bytes,
             followRedirects: false,
@@ -63,7 +63,7 @@ class _State extends State<accident> {
 
   void showDownloadProgress(received, total) {
     if (total != -1) {
-      print((received / total * 100).toStringAsFixed(0) + "%");
+      ((received / total * 100).toStringAsFixed(0) + "%");
     }
   }
 
@@ -78,15 +78,10 @@ class _State extends State<accident> {
     });
   }
 
-
-
   Future<File> createFileOfPdfUrl() async {
     Completer<File> completer = Completer();
     print("Start download file from internet!");
     try {
-      // "https://berlin2017.droidcon.cod.newthinking.net/sites/global.droidcon.cod.newthinking.net/files/media/documents/Flutter%20-%2060FPS%20UI%20of%20the%20future%20%20-%20DroidconDE%2017.pdf";
-      // final url = "https://pdfkit.org/docs/guide.pdf";
-
       final filename = url.substring(url.lastIndexOf("/") + 1);
       var request = await HttpClient().getUrl(Uri.parse(url));
       var response = await request.close();
@@ -95,13 +90,11 @@ class _State extends State<accident> {
       print("Download files");
       print("${dir.path}/$filename");
       File file = File("${dir.path}/$filename");
-
       await file.writeAsBytes(bytes, flush: true);
       completer.complete(file);
     } catch (e) {
       throw Exception('Error parsing asset file!');
     }
-
     return completer.future;
   }
 
@@ -171,7 +164,6 @@ class _State extends State<accident> {
                             Text('10:30')
                           ],
                         )
-
                       ],
                     ),
                     Container(
@@ -278,11 +270,9 @@ class _State extends State<accident> {
                                   //String fullPath = tempDir.path + "/boo2.pdf'";
                                   String fullPath = "$path/test.pdf";
                                   print('full path ${fullPath}');
-
-                                  download2(dio, url, fullPath);
+                                  download(dio, url, fullPath);
                                 },
                               ),
-
                           ],
                         ),
                       ),
