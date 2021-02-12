@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hala_avis_car/screens/custom_route.dart';
-import 'package:hala_avis_car/screens/demo_localization.dart';
-import 'package:hala_avis_car/screens/language_constants.dart';
+import 'package:hala_avis_car/screens/home/custom_router.dart';
+import 'package:hala_avis_car/screens/home/demo_localization.dart';
+import 'package:hala_avis_car/screens/home/language_constants.dart';
+
 
 
 void main() => runApp(MyApp());
@@ -53,12 +54,10 @@ class _MyAppState extends State<MyApp> {
         locale: _locale,
         supportedLocales: [
           Locale("en", "US"),
-          Locale("fa", "IR"),
           Locale("ar", "SA"),
-          Locale("hi", "IN")
         ],
         localizationsDelegates: [
-          DemoLocalization.delegate,
+          DemoLocalization1.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

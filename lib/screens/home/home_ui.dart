@@ -2,18 +2,60 @@ import 'dart:ui';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hala_avis_car/main.dart';
+import 'package:hala_avis_car/screens/home/demo_localization.dart';
+import 'package:hala_avis_car/screens/home/language.dart';
+import 'package:hala_avis_car/screens/home/language_constants.dart';
+
 
 class HomeUi extends StatefulWidget {
+  HomeUi({Key key}) : super(key: key);
+
   @override
   _HomeUiState createState() => _HomeUiState();
 }
 
 class _HomeUiState extends State<HomeUi> {
-
+  
+  void _changeLanguage(Language language) async {
+    Locale _locale = await setLocale(language.languageCode);
+    MyApp.setLocale(context, _locale);
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          actions: [
+            DropdownButton<Language>(
+              underline: SizedBox(),
+              icon: Icon(
+                Icons.language,
+                color: Colors.white,
+              ),
+              onChanged: (Language language) {
+                _changeLanguage(language);
+              },
+              items: Language.languageList()
+                  .map<DropdownMenuItem<Language>>(
+                    (e) => DropdownMenuItem<Language>(
+                  value: e,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(
+                        e.flag,
+                        style: TextStyle(fontSize: 30),
+                      ),
+                      Text(e.name)
+                    ],
+                  ),
+                ),
+              )
+                  .toList(),
+            ),
+          ],
+        ),
         body: Column(
           children: [
             Container(
@@ -46,7 +88,7 @@ class _HomeUiState extends State<HomeUi> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text('My Car01', style: TextStyle(
+                                      Text(DemoLocalization1.of(context).translate("car_name"), style: TextStyle(
                                           color: Colors.red,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15)),
@@ -165,7 +207,7 @@ class _HomeUiState extends State<HomeUi> {
                                            Container(
                                              width: MediaQuery.of(context).size.width * 0.1,
                                            ),
-                                           Icon(Icons.arrow_forward,size: 30,)
+                                           Icon(Icons.arrow_forward,size: 30,),
                                          ],
                                        )
                                    ),
