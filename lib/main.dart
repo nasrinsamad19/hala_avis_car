@@ -1,79 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hala_avis_car/screens/home/custom_router.dart';
-import 'package:hala_avis_car/screens/home/demo_localization.dart';
-import 'package:hala_avis_car/screens/home/language_constants.dart';
+import 'package:hala_avis_car/screens/I18nSample/AppLanguage.dart';
+import 'package:hala_avis_car/screens/I18nSample/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
-  static void setLocale(BuildContext context, Locale newLocale) {
-    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
-    state.setLocale(newLocale);
-  }
-
-  @override
-  _MyAppState createState() => _MyAppState();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  AppLanguage appLanguage = AppLanguage();
+  await appLanguage.fetchLocale();
+  runApp(MyApp(
+    appLanguage: appLanguage,
+  ));
 }
 
-class _MyAppState extends State<MyApp> {
-  Locale _locale;
-  setLocale(Locale locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
+class MyApp extends StatelessWidget {
+  final AppLanguage appLanguage;
 
-  @override
-  void didChangeDependencies() {
-    getLocale().then((locale) {
-      setState(() {
-        this._locale = locale;
-      });
-    });
-    super.didChangeDependencies();
-  }
+  MyApp({this.appLanguage});
 
   @override
   Widget build(BuildContext context) {
-    if (this._locale == null) {
-      return Container(
-        child: Center(
-          child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[800])),
+    return ChangeNotifierProvider<AppLanguage>(
+      builder: (_) => appLanguage,
+      child: Consumer<AppLanguage>(builder: (context, model, child) {
+        return MaterialApp(
+          locale: model.appLocal,
+          supportedLocales: [
+            Locale('en', 'US'),
+            Locale('ar', ''),
+          ],
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+
+          home: AppLang(),
+        );
+      }),
+    );
+  }
+}
+
+class AppLang extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appLanguage = Provider.of<AppLanguage>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).translate('title')),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              AppLocalizations.of(context).translate('Message'),
+              style: TextStyle(fontSize: 32),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RaisedButton(
+                  onPressed: () {
+                    appLanguage.changeLanguage(Locale("en"));
+                  },
+                  child: Text('English'),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    appLanguage.changeLanguage(Locale("ar"));
+                  },
+                  child: Text('العربي'),
+                )
+              ],
+            )
+          ],
         ),
-      );
-    } else {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Flutter Localization Demo",
-        theme: ThemeData(primarySwatch: Colors.blue),
-        locale: _locale,
-        supportedLocales: [
-          Locale("en", "US"),
-          Locale("ar", "SA"),
-        ],
-        localizationsDelegates: [
-          DemoLocalization1.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        localeResolutionCallback: (locale, supportedLocales) {
-          for (var supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale.languageCode &&
-                supportedLocale.countryCode == locale.countryCode) {
-              return supportedLocale;
-            }
-          }
-          return supportedLocales.first;
-        },
-        onGenerateRoute: CustomRouter.generatedRoute,
-        initialRoute: homeRoute,
-      );
-    }
+      ),
+    );
   }
 }
