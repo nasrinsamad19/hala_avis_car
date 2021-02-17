@@ -1,0 +1,15 @@
+{
+  "title": "Enter Details",
+  "subtitle": "All fields are mandatory",
+  "NationalIdKey": "National ID*",
+  "NationalIdKeyHint" : "Enter National ID number",
+  "UploadNationalIdKey":"Upload National ID",
+  "DrivingLicenceKey": "Driving Licence*",
+  "LicenseNumberKey": "Enter Driving License number",
+  "UploadDrivingLicensekey": "Upload Driving License",
+  "PlateNo": "Plate No*",
+  "MobileNo": "Mobile No*",
+  "DOB": "Date of Birth*",
+  "Login": "Login"
+
+}
