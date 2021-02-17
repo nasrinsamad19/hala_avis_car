@@ -16,8 +16,7 @@ class DemoLocalization {
     String jsonStringValues =
     await rootBundle.loadString('assets/lang/${locale.languageCode}.json');
     Map<String, dynamic> mappedJson = json.decode(jsonStringValues);
-    _localizedValues =
-        mappedJson.map((key, value) => MapEntry(key, value.toString()));
+    _localizedValues = mappedJson.map((key, value) => MapEntry(key, value.toString()));
   }
 
   String translate(String key) {

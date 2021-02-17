@@ -1,0 +1,9 @@
+{
+  "title": "AVIS",
+  "message": "Welcome",
+  "Message2": "Sign to continue",
+  "txt1" : "Enter Registered  ID",
+  "hint1":"National ID/ Plate No/ Phone No",
+  "language": "Language",
+  "button": "Login"
+}

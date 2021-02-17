@@ -1,80 +1,149 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hala_avis_car/screens/custom_route.dart';
-import 'package:hala_avis_car/screens/demo_localization.dart';
-import 'package:hala_avis_car/screens/language_constants.dart';
+import 'package:hala_avis_car/screens/I18nSample/AppLanguage.dart';
+import 'package:hala_avis_car/screens/I18nSample/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
-  static void setLocale(BuildContext context, Locale newLocale) {
-    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
-    state.setLocale(newLocale);
-  }
-
-  @override
-  _MyAppState createState() => _MyAppState();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  AppLanguage appLanguage = AppLanguage();
+  await appLanguage.fetchLocale();
+  runApp(MyApp(
+    appLanguage: appLanguage,
+  ));
 }
 
-class _MyAppState extends State<MyApp> {
-  Locale _locale;
-  setLocale(Locale locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
+class MyApp extends StatelessWidget {
+  final AppLanguage appLanguage;
 
-  @override
-  void didChangeDependencies() {
-    getLocale().then((locale) {
-      setState(() {
-        this._locale = locale;
-      });
-    });
-    super.didChangeDependencies();
-  }
+  MyApp({this.appLanguage});
 
   @override
   Widget build(BuildContext context) {
-    if (this._locale == null) {
-      return Container(
-        child: Center(
-          child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[800])),
+    return ChangeNotifierProvider<AppLanguage>(
+      builder: (_) => appLanguage,
+      child: Consumer<AppLanguage>(builder: (context, model, child) {
+        return MaterialApp(
+          locale: model.appLocal,
+          supportedLocales: [
+            Locale('en', 'US'),
+            Locale('ar', ''),
+          ],
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+
+          home: AppLang(),
+        );
+      }),
+    );
+  }
+}
+
+class AppLang extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appLanguage = Provider.of<AppLanguage>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).translate('button'),
         ),
-      );
-    } else {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Flutter Localization Demo",
-        theme: ThemeData(primarySwatch: Colors.blue),
-        locale: _locale,
-        supportedLocales: [
-          Locale("en", "US"),
-          Locale("fa", "IR"),
-          Locale("ar", "SA"),
-          Locale("hi", "IN")
-        ],
-        localizationsDelegates: [
-          DemoLocalization.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        localeResolutionCallback: (locale, supportedLocales) {
-          for (var supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale.languageCode &&
-                supportedLocale.countryCode == locale.countryCode) {
-              return supportedLocale;
-            }
-          }
-          return supportedLocales.first;
-        },
-        onGenerateRoute: CustomRouter.generatedRoute,
-        initialRoute: homeRoute,
-      );
-    }
+        backgroundColor: Colors.red,
+      ),
+      body: Container(
+          padding: EdgeInsets.only(top: 25),
+          alignment: Alignment.topLeft,
+          child: Column(
+            children: <Widget>[
+              Text(
+                AppLocalizations.of(context).translate('title'),
+                style: TextStyle(fontSize: 72),
+              ),
+              Container(
+                height: 10,
+              ),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(left: 20,top: 20,right: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).translate('message'),
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Container(
+                      height: 5,
+                    ),
+                    Text(
+                      AppLocalizations.of(context).translate('Message2'),
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+
+              ),
+              Container(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20,top: 20,right: 20),
+
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).translate('txt1'),
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20,right: 20),
+                alignment: Alignment.topLeft,
+                child:TextFormField(
+                  decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).translate('hint1')
+                  ),
+                ),
+              ),
+
+              Container(
+                height: 50,
+              ),
+              RaisedButton(
+                onPressed: () {},
+                child: Text(AppLocalizations.of(context).translate('button'),
+                  style: TextStyle(fontSize: 15),),
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      appLanguage.changeLanguage(Locale("en"));
+                    },
+                    child: Text('English'),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      appLanguage.changeLanguage(Locale("ar"));
+                    },
+                    child: Text('العربي'),
+                  )
+                ],
+              ),
+
+            ],
+          ),
+        ),
+    );
   }
 }
