@@ -18,6 +18,7 @@ Map<int, Color> color =
 
 class ColorNames {
   Color maroon = const Color(0xffD4002A);
-  Color grey  =  Colors.grey;
+  Color grey  =  Color(0xFF707070);
+  Color black = Color(0xFF1C1C1C);
   MaterialColor materialMaroon =  MaterialColor(0xffD4002A, color);
 }

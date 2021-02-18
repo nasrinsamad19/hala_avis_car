@@ -27,23 +27,29 @@ class _EmailUiState extends State<EmailUi> {
               ),
               Text(AppLocalizations.of(context).translate('title'),style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
+                color: ColorNames().black,
                 fontSize: 20,
               ),textAlign: TextAlign.center,),
               Container(
                 height: MediaQuery.of(context).size.height*0.03,
               ),
-              RichText(text: TextSpan(
-                text: AppLocalizations.of(context).translate('message2'),style: GoogleFonts.lato(
-                fontSize: 16,
-                color: Colors.black12
+              Container(
+                child: Center(
+                  child: RichText(text: TextSpan(
+                      text: AppLocalizations.of(context).translate('message1'),style: GoogleFonts.lato(
+                      fontSize: 16,
+                    color: ColorNames().grey,
 
+                  ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: AppLocalizations.of(context).translate('message2'),style: TextStyle(fontWeight: FontWeight.bold,color: ColorNames().black,)
+                        )
+                      ]
+                  ),textAlign: TextAlign.center,),
+                ),
               ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: AppLocalizations.of(context).translate('message2'),style: TextStyle(fontWeight: FontWeight.bold)
-                  )
-                ]
-              ),textAlign: TextAlign.center,),
+
 
               Container(
               height: MediaQuery.of(context).size.height*0.03,
