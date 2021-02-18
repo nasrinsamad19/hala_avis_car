@@ -19,7 +19,7 @@ class _HomeUiState extends State<HomeUi> {
   
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
-    MyApp.setLocale(context, _locale);
+    //MyApp.setLocale(context, _locale);
   }
   @override
   Widget build(BuildContext context) {
