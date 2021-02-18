@@ -3,13 +3,15 @@
   "subtitle": "All fields are mandatory",
   "NationalIdKey": "National ID*",
   "NationalIdKeyHint" : "Enter National ID number",
-  "UploadNationalIdKey":"Upload National ID",
+  "UploadNationalIdKey1":"Upload National ID",
+  "UploadNationalIdKey2":"imagename.jpg",
   "DrivingLicenceKey": "Driving Licence*",
   "LicenseNumberKey": "Enter Driving License number",
   "UploadDrivingLicensekey": "Upload Driving License",
   "PlateNo": "Plate No*",
   "MobileNo": "Mobile No*",
   "DOB": "Date of Birth*",
-  "Login": "Login"
+  "Login": "Login",
+  "errorText": "Value can\\'t Be Empty"
 
 }
