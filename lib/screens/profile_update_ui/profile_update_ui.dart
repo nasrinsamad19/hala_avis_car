@@ -67,7 +67,7 @@ class _LoginUiState extends State<ProfileUpdateUI> {
             child: Container(
               padding: EdgeInsets.all(50),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     alignment:Alignment.center,
@@ -106,8 +106,14 @@ class _LoginUiState extends State<ProfileUpdateUI> {
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
 
-                  TextField(
+                  TextFormField(
                     textAlign: TextAlign.center,
+                    validator: (text){
+                      if(text.isEmpty){
+                        return AppLocalizations.of(context).translate('errorText');
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                         hintText: 'ABCD1234',
                         hintStyle: TextStyle(
@@ -236,7 +242,7 @@ class _LoginUiState extends State<ProfileUpdateUI> {
                     height: MediaQuery.of(context).size.height * 0.04,
                   ),
                   DottedLine(
-                    dashColor: Colors.grey,
+                    dashColor: ColorNames().grey,
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.04,
@@ -249,7 +255,13 @@ class _LoginUiState extends State<ProfileUpdateUI> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
-                  TextField(
+                  TextFormField(
+                    validator: (text){
+                      if(text.isEmpty){
+                        return AppLocalizations.of(context).translate('errorText');
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                         hintText: '1234ABC',
                         hintStyle: TextStyle(
@@ -269,7 +281,13 @@ class _LoginUiState extends State<ProfileUpdateUI> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
-                  TextField(
+                  TextFormField(
+                    validator: (text){
+                      if(text.isEmpty){
+                        return AppLocalizations.of(context).translate('errorText');
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                         hintText: '9876543210',
                         hintStyle: TextStyle(
@@ -289,8 +307,14 @@ class _LoginUiState extends State<ProfileUpdateUI> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
-                  TextField(
+                  TextFormField(
                     controller: dateController,
+                    validator: (text){
+                      if(text.isEmpty){
+                        return AppLocalizations.of(context).translate('errorText');
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: "${selectedDate.day.toString()}-${selectedDate.month.toString().padLeft(2,'0')}-${selectedDate.year.toString().padLeft(2,'0')}".split(' ')[0],
