@@ -73,7 +73,7 @@ flutter:
     - assets/profile/Icon feather-calendar.png
     - i18n_profile_update/ar.json
     - i18n_profile_update/en.json
-    -
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
