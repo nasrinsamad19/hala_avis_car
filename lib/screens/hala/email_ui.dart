@@ -43,8 +43,13 @@ class _EmailUiState extends State<EmailUi> {
                   ),
                       children: <TextSpan>[
                         TextSpan(
+                            text: AppLocalizations.of(context).translate('message3'),style: TextStyle(fontWeight: FontWeight.bold,color: ColorNames().black,)
+                        ),
+
+                        TextSpan(
                             text: AppLocalizations.of(context).translate('message2'),style: TextStyle(fontWeight: FontWeight.bold,color: ColorNames().black,)
-                        )
+                        ),
+
                       ]
                   ),textAlign: TextAlign.center,),
                 ),
