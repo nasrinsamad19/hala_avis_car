@@ -7,7 +7,7 @@ import 'package:hala_avis_car/screens/car_details/my_car.dart';
 import 'package:hala_avis_car/screens/drawer/drawer_ui.dart';
 import 'package:hala_avis_car/screens/flutter_database/sample/student_view.dart';
 import 'package:hala_avis_car/screens/flutter_database/sampleui.dart';
-import 'package:hala_avis_car/screens/profile_update_ui/profile_update_ui.dart';
+import 'package:hala_avis_car/screens/hala/email_ui.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          home: ProfileUpdateUI(),
+          home: EmailUi(),
         );
       }),
     );

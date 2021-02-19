@@ -44,8 +44,8 @@ dependencies:
     sdk: flutter
   intl: ^0.16.1
   sqflite: ^1.2.0
-  dotted_line: ^2.0.2
   google_fonts: ^1.1.2
+  dotted_line: ^2.0.2
   image_picker: ^0.6.7+11
 
 
@@ -70,10 +70,12 @@ flutter:
     - assets/home_lang/
     - i18n/ar.json
     - i18n/en.json
+    - i18n_hala_email_ui/ar.json
+    - i18n_hala_email_ui/en.json
+    - assets/email_ui/email (7).png
     - assets/profile/Icon feather-calendar.png
     - i18n_profile_update/ar.json
     - i18n_profile_update/en.json
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
