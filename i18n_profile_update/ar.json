@@ -1,0 +1,16 @@
+{
+  "title": "أدخل التفاصيل",
+  "subtitle": "جميع الحقول إلزامية",
+  "NationalIdKey": "الهوية الوطنية*",
+  "NationalIdKeyHint" : "أدخل رقم الهوية الوطنية",
+  "UploadNationalIdKey1":"تحميل الرقم القومي",
+  "UploadNationalIdKey2":"imagename.jpg",
+  "DrivingLicenceKey": "رخصة قيادة*",
+  "LicenseNumberKey": "أدخل رقم رخصة القيادة",
+  "UploadDrivingLicensekey": "تحميل رخصة القيادة",
+  "PlateNo": "لوحة لا*",
+  "MobileNo": "رقم المحمول*",
+  "DOB": "تاريخ الولادة*",
+  "Login": "تسجيل الدخول",
+  "errorText": "لا يمكن أن تكون القيمة فارغة"
+}
