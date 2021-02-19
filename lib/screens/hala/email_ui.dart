@@ -39,17 +39,11 @@ class _EmailUiState extends State<EmailUi> {
                       text: AppLocalizations.of(context).translate('message1'),style: GoogleFonts.lato(
                       fontSize: 16,
                     color: ColorNames().grey,
-
                   ),
                       children: <TextSpan>[
                         TextSpan(
-                            text: AppLocalizations.of(context).translate('message3'),style: TextStyle(fontWeight: FontWeight.bold,color: ColorNames().black,)
-                        ),
-
-                        TextSpan(
                             text: AppLocalizations.of(context).translate('message2'),style: TextStyle(fontWeight: FontWeight.bold,color: ColorNames().black,)
                         ),
-
                       ]
                   ),textAlign: TextAlign.center,),
                 ),
